@@ -1,2 +1,4 @@
-# IndKPI
-Indicadores de Performance em Máquinas Industriais
+# AutoKPIs
+Performance Indicators for Vehicles
+
+Release 1 - Sample data generator + Read Raw Data python script
