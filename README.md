@@ -1,4 +1,4 @@
-# AutoKPIs
-Performance Indicators for Vehicles
+# IndKPIs
+Performance Indicators for Industrial Products
 
-Release 1 - Sample data generator + Read Raw Data python script
+Release 1 - Automotive : Sample data generator + Read Raw Data python script
