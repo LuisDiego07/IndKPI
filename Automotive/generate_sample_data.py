@@ -3,7 +3,7 @@ import numpy as np
 from datetime import datetime, timedelta
 import random
 
-# Número de registros simulados
+# Number of simulated tests
 n = 1000
 
 # Função para gerar timestamps sequenciais
@@ -14,7 +14,7 @@ start_time = datetime.now()
 timestamps = generate_timestamps(start_time, n)
 
 # Tipos de veículos
-vehicle_types = ['car', 'motorcycle']
+vehicle_types = ['car', 'motorcycle', 'truck', 'bus']
 brands = ['Honda', 'Toyota', 'BMW', 'Yamaha', 'Kawasaki']
 models = ['Model A', 'Model B', 'Model C', 'Model D', 'Model E']
 engine_types = ['combustion', 'electric', 'hybrid']
