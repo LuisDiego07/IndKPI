@@ -2,7 +2,7 @@ from pathlib import Path
 import pandas as pd
 
 # Path depends on "data" directory on project
-data_dir = Path(__file__).parent / "data"
+data_dir = Path(__file__).parent / "data/raw"
 path_crosser_150_2025 = data_dir / "specifications_yamaha_crosser_150_2025.csv"
 path_factor_125_2025 = data_dir / "specifications_yamaha_factor_125_2025.csv"
 
@@ -14,3 +14,6 @@ df_factor_125_2025 = pd.read_csv(path_factor_125_2025)
 df_factor_125_2025["modelo"] = "YBR 125cc Factor"
 df_factor_125_2025["ano"] = "2025"
 
+df_yamaha_data = pd.concat([df_crosser_150_2025, df_factor_125_2025], ignore_index=True)
+
+print(df_factor_125_2025.head())
