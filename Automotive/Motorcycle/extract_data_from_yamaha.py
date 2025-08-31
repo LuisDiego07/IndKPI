@@ -16,4 +16,4 @@ df_factor_125_2025["ano"] = "2025"
 
 df_yamaha_data = pd.concat([df_crosser_150_2025, df_factor_125_2025], ignore_index=True)
 
-print(df_factor_125_2025.head())
+print(df_yamaha_data)
