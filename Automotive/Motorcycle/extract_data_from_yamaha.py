@@ -1,5 +1,6 @@
 from pathlib import Path
 import pandas as pd
+from deltalake.writer import write_deltalake
 
 # Path depends on "data" directory on project
 data_dir = Path(__file__).parent / "data/raw"
@@ -16,4 +17,7 @@ df_factor_125_2025["ano"] = "2025"
 
 df_yamaha_data = pd.concat([df_crosser_150_2025, df_factor_125_2025], ignore_index=True)
 
-print(df_yamaha_data)
+output_file = data_dir / "silver" / "tech_data_yamaha.csv"
+
+output_file.parent.mkdir(parents=True, exist_ok=True)
+df_yamaha_data.to_csv(output_file, index=False, encoding="utf-8")
