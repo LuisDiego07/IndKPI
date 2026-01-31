@@ -135,10 +135,9 @@ IndKPI/
     │   ├── silver_transformer.py     # Silver layer: data enrichment & normalization
     │   ├── gold_oee.py               # Gold layer: OEE and KPI calculations (business logic)
     │
-    │   ├── run_bronze.py             # Executes Bronze layer
-    │   ├── run_silver.py             # Executes Silver layer
+    │   ├── run_bronze.py             # Executes Bronze layer (JSON → Parquet)
+    │   ├── run_silver.py             # Executes Silver layer (Bronze → Silver)
     │   ├── run_gold_oee_parquet.py   # Executes Gold layer (Parquet output)
-    │   ├── run_gold_oee_postgres.py  # Executes Gold layer (PostgreSQL Star Schema)
     │
     │   └── data_lake/
     │       ├── bronze/               # Raw telemetry data (Parquet)
@@ -148,20 +147,19 @@ IndKPI/
     ├── sql/
     │   └── star_schema/
     │       ├── ddl/
-    │       │   ├── create_schema.sql     # Creates analytics schema
-    │       │   ├── dim_date.sql          # Date dimension DDL
-    │       │   ├── dim_machine.sql       # Machine dimension DDL
-    │       │   └── fact_oee.sql           # OEE fact table DDL
+    │       │   ├── create_schema.sql # Creates analytics schema
+    │       │   ├── dim_date.sql      # Date dimension DDL
+    │       │   ├── dim_machine.sql   # Machine dimension DDL
+    │       │   └── fact_oee.sql      # OEE fact table DDL
     │       │
     │       ├── dml/
     │       │   ├── load_dim_date.sql     # Date dimension load logic
     │       │   ├── load_dim_machine.sql  # Machine dimension load logic
-    │       │   └── load_fact_oee.sql     # Fact OEE upsert logic
+    │       │   └── load_fact_oee.sql     # Fact OEE load logic
     │       │
     │       └── analytics/
     │           ├── oee_by_machine.sql    # OEE by machine
-    │           ├── oee_by_day.sql        # OEE daily trend
+    │           ├── oee_by_day.sql        # Daily OEE trend
     │           └── losses_breakdown.sql  # Availability / Performance / Quality losses
     │
-    └── requirements.txt              # Project dependencies
-
+    └── requirements.txt                  # Project dependencies

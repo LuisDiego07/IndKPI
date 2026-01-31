@@ -1,0 +1,6 @@
+# Local execution scripts with credentials
+run_gold_oee_postgres.py
+
+# Environment / secrets
+.env
+*.env
