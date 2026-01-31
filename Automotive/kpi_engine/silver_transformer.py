@@ -22,3 +22,9 @@ def enrich_silver(df: pd.DataFrame) -> pd.DataFrame:
     df.loc[df["good_units"] < 0, "good_units"] = 0
 
     return df
+
+def save_silver(df):
+    df.to_parquet(
+        "data_lake/silver/telemetry_enriched.parquet",
+        index=False
+    )

@@ -40,3 +40,9 @@ def load_bronze(path: str) -> pd.DataFrame:
         df[col] = pd.to_numeric(df[col], errors="coerce")
 
     return df
+
+def save_bronze(df):
+    df.to_parquet(
+        "data_lake/bronze/telemetry_events.parquet",
+        index=False
+    )
