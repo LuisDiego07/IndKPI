@@ -1,4 +1,6 @@
 import pandas as pd
+from pathlib import Path
+from typing import Union
 
 def calculate_oee_gold(
     df: pd.DataFrame,
@@ -49,3 +51,12 @@ def calculate_oee_gold(
         })
 
     return pd.DataFrame(results)
+
+def save_gold_parquet(
+    df: pd.DataFrame,
+    output_path: Union[Path, str]
+):
+    output_path = Path(output_path)
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+
+    df.to_parquet(output_path, index=False)
