@@ -20,6 +20,8 @@ The goal is to model **realistic shop-floor behavior**, including:
 
 ---
 
+📦 Project Structure
+
 IndKPIs/
  ├── data_simulator/
  │    ├── machine.py              # Machine behavior model
