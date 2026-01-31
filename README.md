@@ -23,20 +23,20 @@ The goal is to model **realistic shop-floor behavior**, including:
 📦 Project Structure
 
 IndKPIs/
- ├── data_simulator/
- │    ├── machine.py              # Machine behavior model
- │    ├── simulator.py            # Telemetry simulation engine
- │    └── run_simulation.py       # Generates telemetry_events.json
- │
- ├── kpi_engine/
- │    ├── bronze_loader.py        # Bronze layer: raw data ingestion
- │    ├── silver_transformer.py   # Silver layer: data enrichment & normalization
- │    ├── gold_oee.py             # Gold layer: OEE and KPI calculations
- │    └── run_pipeline.py         # End-to-end medallion pipeline execution
- │
- ├── data_lake/
- │    ├── bronze/                 # Raw telemetry data (Parquet)
- │    ├── silver/                 # Enriched telemetry data (Parquet)
- │    └── gold/                   # KPI datasets (Parquet or DB exports)
- │
- └── README.md
+├── data_simulator/
+│   ├── machine.py            # Machine behavior model
+│   ├── simulator.py          # Telemetry simulation engine
+│   └── run_simulation.py     # Generates telemetry_events.json
+│
+├── kpi_engine/
+│   ├── bronze_loader.py      # Bronze layer: raw data ingestion
+│   ├── silver_transformer.py # Silver layer: data enrichment & normalization
+│   ├── gold_oee.py           # Gold layer: OEE and KPI calculations
+│   └── run_pipeline.py       # End-to-end medallion pipeline execution
+│
+├── data_lake/
+│   ├── bronze/               # Raw telemetry data (Parquet)
+│   ├── silver/               # Enriched telemetry data (Parquet)
+│   └── gold/                 # KPI datasets (Parquet or DB exports)
+│
+└── README.md
