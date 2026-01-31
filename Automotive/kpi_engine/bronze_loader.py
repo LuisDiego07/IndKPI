@@ -1,4 +1,6 @@
 import json
+from pathlib import Path
+from typing import Union
 import pandas as pd
 
 REQUIRED_COLUMNS = [
@@ -14,18 +16,19 @@ REQUIRED_COLUMNS = [
     "vibration_mm_s"
 ]
 
-def load_bronze(path: str) -> pd.DataFrame:
-    with open(path) as f:
+def load_bronze(path: Union[Path, str]) -> pd.DataFrame:
+    path = Path(path)
+
+    with open(path, "r", encoding="utf-8") as f:
         data = json.load(f)
 
     df = pd.DataFrame(data)
 
-    # Validação mínima
     missing = set(REQUIRED_COLUMNS) - set(df.columns)
     if missing:
-        raise ValueError(f"Missing columns: {missing}")
+        raise ValueError(f"Missing columns in bronze layer: {missing}")
 
-    df["timestamp"] = pd.to_datetime(df["timestamp"])
+    df["timestamp"] = pd.to_datetime(df["timestamp"], errors="coerce")
 
     numeric_cols = [
         "cycle_time",
@@ -41,8 +44,12 @@ def load_bronze(path: str) -> pd.DataFrame:
 
     return df
 
-def save_bronze(df):
-    df.to_parquet(
-        "data_lake/bronze/telemetry_events.parquet",
-        index=False
-    )
+def save_bronze(df: pd.DataFrame, output_path: Union[Path, str, None] = None):
+    if output_path is None:
+        output_path = Path("data_lake/bronze/telemetry_events.parquet")
+    else:
+        output_path = Path(output_path)
+
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+
+    df.to_parquet(output_path, index=False)
