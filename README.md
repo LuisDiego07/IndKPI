@@ -73,8 +73,31 @@ This path ensures that analytical results can be reproduced without requiring ex
 **Execution:**
 ```bash
 python run_gold_oee_parquet.py
+```
 
-🎯 Project Goals
+### 2️⃣ Gold as Star Schema (Analytical Database)
+
+The Gold dataset is also modeled as a Star Schema, composed of:
+
+Fact table: OEE metrics
+
+Dimension tables: machines, dates
+
+Designed to be stored in a PostgreSQL analytical database, optimized for BI tools and dashboards.
+
+The repository includes:
+
+SQL DDL scripts for schema and table creation
+
+SQL DML scripts for dimension and fact population
+
+Analytical SQL queries used in dashboards
+
+⚠️ Direct access to the PostgreSQL database is not publicly available.
+
+Instead, insights are shared via a public dashboard while maintaining enterprise-style database access control.
+
+### 🎯 Project Goals
 
 Demonstrate an industrial-grade data architecture
 
@@ -86,8 +109,7 @@ Provide a reproducible, auditable and realistic analytics pipeline
 
 Simulate enterprise-level analytical modeling
 
-📦 Project Structure
-
+### 📦 Project Structure
 IndKPIs/
 └── Automotive/
     ├── data_simulator/
