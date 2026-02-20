@@ -110,6 +110,8 @@ Provide a reproducible, auditable and realistic analytics pipeline
 Simulate enterprise-level analytical modeling
 
 ### 📦 Project Structure
+
+```text
 IndKPIs/
 └── Automotive/
     ├── data_simulator/
@@ -122,12 +124,12 @@ IndKPIs/
     │   ├── bronze_loader.py
     │   ├── silver_transformer.py
     │   ├── gold_oee.py
-    │
+    │   │
     │   ├── run_bronze.py
     │   ├── run_silver.py
     │   ├── run_gold_oee_parquet.py
     │   ├── run_gold_oee_postgres.py
-    │
+    │   │
     │   └── data_lake/
     │       ├── bronze/
     │       ├── silver/
