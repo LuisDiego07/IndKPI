@@ -73,3 +73,60 @@ This path ensures that analytical results can be reproduced without requiring ex
 **Execution:**
 ```bash
 python run_gold_oee_parquet.py
+
+🎯 Project Goals
+
+Demonstrate an industrial-grade data architecture
+
+Apply real manufacturing KPIs (OEE, availability, quality)
+
+Showcase best practices in data engineering
+
+Provide a reproducible, auditable and realistic analytics pipeline
+
+Simulate enterprise-level analytical modeling
+
+📦 Project Structure
+
+IndKPIs/
+└── Automotive/
+    ├── data_simulator/
+    │   ├── machine.py
+    │   ├── simulator.py
+    │   ├── run_simulator.py
+    │   └── telemetry_events.json
+    │
+    ├── kpi_engine/
+    │   ├── bronze_loader.py
+    │   ├── silver_transformer.py
+    │   ├── gold_oee.py
+    │
+    │   ├── run_bronze.py
+    │   ├── run_silver.py
+    │   ├── run_gold_oee_parquet.py
+    │   ├── run_gold_oee_postgres.py
+    │
+    │   └── data_lake/
+    │       ├── bronze/
+    │       ├── silver/
+    │       └── gold/
+    │
+    ├── sql/
+    │   └── star_schema/
+    │       ├── ddl/
+    │       │   ├── create_schema.sql
+    │       │   ├── dim_date.sql
+    │       │   ├── dim_machine.sql
+    │       │   └── fact_oee.sql
+    │       │
+    │       ├── dml/
+    │       │   ├── load_dim_date.sql
+    │       │   ├── load_dim_machine.sql
+    │       │   └── load_fact_oee.sql
+    │       │
+    │       └── analytics/
+    │           ├── oee_by_machine.sql
+    │           ├── oee_by_day.sql
+    │           └── losses_breakdown.sql
+    │
+    └── requirements.txt
