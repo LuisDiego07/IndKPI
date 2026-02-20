@@ -1,25 +1,16 @@
-from datetime import datetime, timedelta
-from typing import List
-from Automotive.data_simulator.machine import Machine
+from datetime import timedelta
 
 class TelemetrySimulator:
-    def __init__(self, machines: List[Machine]):
+
+    def __init__(self, machines):
         self.machines = machines
 
-    def run(
-        self,
-        start_time: datetime,
-        duration_minutes: int,
-        interval_seconds: int = 60
-    ):
-        events = []
+    def run(self, start_time, duration_minutes, interval_seconds=60):
+
         current_time = start_time
         end_time = start_time + timedelta(minutes=duration_minutes)
 
         while current_time < end_time:
             for machine in self.machines:
-                event = machine.generate_event(current_time)
-                events.append(event)
+                yield machine.generate_event(current_time)
             current_time += timedelta(seconds=interval_seconds)
-
-        return events

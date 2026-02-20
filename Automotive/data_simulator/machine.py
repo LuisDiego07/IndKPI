@@ -1,7 +1,13 @@
-import random
 from datetime import datetime
+from data_simulator.failure_model import FailureModel
+from data_simulator.sensor_model import SensorModel
+from data_simulator.production_context import ProductionContext
+from data_simulator.enums import MachineStatus, EventType
+import random
+
 
 class Machine:
+
     def __init__(
         self,
         machine_id: str,
@@ -14,40 +20,41 @@ class Machine:
         self.machine_type = machine_type
         self.nominal_cycle_time = nominal_cycle_time
         self.defect_rate = defect_rate
-        self.failure_rate = failure_rate
-        self.status = "RUNNING"
+        self.status = MachineStatus.RUNNING
+        self.failure_model = FailureModel(failure_rate)
 
-    def generate_event(self, timestamp: datetime) -> dict:
-        # Simula falha
-        if random.random() < self.failure_rate:
-            self.status = "FAILURE"
-        elif self.status == "FAILURE" and random.random() < 0.3:
-            self.status = "RUNNING"
+    def generate_event(self, timestamp: datetime):
 
-        if self.status == "RUNNING":
-            cycle_time = random.gauss(self.nominal_cycle_time, 3)
-            produced_units = 1
-            defective_units = 1 if random.random() < self.defect_rate else 0
-            energy_kw = random.uniform(8, 15)
-            temperature_c = random.uniform(60, 75)
-            vibration = random.uniform(1.5, 3.0)
+        self.failure_model.degrade()
+
+        if self.failure_model.check_failure():
+            self.status = MachineStatus.FAILURE
+
+        context = ProductionContext.generate_context()
+
+        if self.status == MachineStatus.RUNNING:
+            sensors = SensorModel.generate_running_metrics(
+                self.nominal_cycle_time
+            )
+            produced = 1
+            defective = 1 if random.random() < self.defect_rate else 0
+            event_type = EventType.PRODUCTION.value
+
         else:
-            cycle_time = None
-            produced_units = 0
-            defective_units = 0
-            energy_kw = random.uniform(2, 4)
-            temperature_c = random.uniform(50, 60)
-            vibration = random.uniform(5.5, 7.5)
+            sensors = SensorModel.generate_failure_metrics()
+            produced = 0
+            defective = 0
+            event_type = EventType.FAILURE.value
 
         return {
             "timestamp": timestamp.isoformat(),
             "machine_id": self.machine_id,
             "machine_type": self.machine_type,
-            "status": self.status,
-            "cycle_time": cycle_time,
-            "produced_units": produced_units,
-            "defective_units": defective_units,
-            "energy_kw": round(energy_kw, 2),
-            "temperature_c": round(temperature_c, 2),
-            "vibration_mm_s": round(vibration, 2),
+            "status": self.status.value,
+            "event_type": event_type,
+            "health_index": round(self.failure_model.health_index, 4),
+            "produced_units": produced,
+            "defective_units": defective,
+            **sensors,
+            **context
         }
